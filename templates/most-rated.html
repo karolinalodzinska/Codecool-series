@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/pagination.css') }}">
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
@@ -56,8 +57,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for show in shows %}
-                        <tr>
+                {% for show in shows %}
+                    <tr>
                         <td><a href="{{ '/show/' + (show['id'] | string) }}">{{ show.title }}</a></td>
                         <td>{{ show.year }}</td>
                         <td>{{ show.runtime }}</td>
@@ -66,22 +67,50 @@
                         <td>
                             {% if show.trailer %}
                                 <a href={{ show.trailer }}>{{ show.trailer }}</a>
-                                {% else %}
+                            {% else %}
                                 {{ "No URL" }}
                             {% endif %}
                         </td>
                         <td>
                             {% if show.homepage %}
                                 <a href={{ show.homepage }}>{{ show.homepage }}</a>
-                                {% else %}
+                            {% else %}
                                 {{ "No URL" }}
                             {% endif %}
                         </td>
-                        </tr>
-                    {% endfor %}
+                    </tr>
+                {% endfor %}
                 </tbody>
 
             </table>
+        </div>
+        <div class="pagination">
+            {% if page_number > 1 %}
+                <a href="{{ url_for('most_rated', page = page_number - 1) }}">«</a>
+            {% else %}
+                <span>«</span>
+            {% endif %}
+
+            {#to poprawić żeby było zoptymalizowane#}
+            {% if page_number <= (max_pagination - 8) %}
+                {% for i in range(0,8) %}
+                    <a href="{{ url_for('most_rated', page = page_number + i) }}">{{ page_number + i }}</a>
+                {% endfor %}
+            {% else %}
+                {% for i in range(0,8) %}
+                    <a href="{{ url_for('most_rated', page = (max_pagination - 7) + i) }}">
+                        {{ (max_pagination - 7) + i }}
+                    </a>
+                {% endfor %}
+            {% endif %}
+            {#dotąd#}
+{#        <a class="active"#}
+
+            {% if page_number <= (shows_quantity/15) %}
+                <a href="{{ url_for('most_rated', page = page_number + 1) }}">»</a>
+            {% else %}
+                <span>»</span>
+            {% endif %}
         </div>
     </section>
     <footer>
