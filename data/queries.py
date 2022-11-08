@@ -11,7 +11,7 @@ def get_most_rated_shows():
     shows.title,
     shows.year,
     shows.runtime,
-    to_char(shows.rating,'999.9') AS rating,
+    round(shows.rating, 1) AS rating,
     string_agg(genres.name,',' ORDER BY genres.name) AS genres,
     shows.trailer,
     shows.homepage
