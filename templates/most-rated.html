@@ -94,17 +94,22 @@
             {#to poprawić żeby było zoptymalizowane#}
             {% if page_number <= (max_pagination - 8) %}
                 {% for i in range(0,8) %}
-                    <a href="{{ url_for('most_rated', page = page_number + i) }}">{{ page_number + i }}</a>
+                    {% if i==0 %}
+                        <a class="active" href="{{ url_for('most_rated', page = page_number + i) }}">{{ page_number + i }}</a>
+                    {% else %}
+                        <a href="{{ url_for('most_rated', page = page_number + i) }}">{{ page_number + i }}</a>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 {% for i in range(0,8) %}
-                    <a href="{{ url_for('most_rated', page = (max_pagination - 7) + i) }}">
-                        {{ (max_pagination - 7) + i }}
-                    </a>
+                    {% if page_number == ((max_pagination - 7) + i) %}
+                        <a class="active" href="{{ url_for('most_rated', page = (max_pagination - 7) + i) }}">{{ (max_pagination - 7) + i }}</a>
+                    {% else %}
+                        <a href="{{ url_for('most_rated', page = (max_pagination - 7) + i) }}">{{ (max_pagination - 7) + i }}</a>
+                {% endif %}
                 {% endfor %}
             {% endif %}
             {#dotąd#}
-{#        <a class="active"#}
 
             {% if page_number <= (shows_quantity/15) %}
                 <a href="{{ url_for('most_rated', page = page_number + 1) }}">»</a>
