@@ -44,13 +44,43 @@
         <h1 class="title text-center">Shows</h1>
         <div class="card">
             <table>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Runtime (min)</th>
-                <th>Rating</th>
-                <th>Genres</th>
-                <th>Trailer</th>
-                <th>Homepage</th>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Runtime</th>
+                    <th>Rating</th>
+                    <th>Genres</th>
+                    <th>Trailer</th>
+                    <th>Homepage</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for show in shows %}
+                        <tr>
+                        <td><a href="{{ '/show/' + (show['id'] | string) }}">{{ show.title }}</a></td>
+                        <td>{{ show.year }}</td>
+                        <td>{{ show.runtime }}</td>
+                        <td>{{ show.rating }}</td>
+                        <td>{{ show.genres }}</td>
+                        <td>
+                            {% if show.trailer %}
+                                <a href={{ show.trailer }}>{{ show.trailer }}</a>
+                                {% else %}
+                                {{ "No URL" }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if show.homepage %}
+                                <a href={{ show.homepage }}>{{ show.homepage }}</a>
+                                {% else %}
+                                {{ "No URL" }}
+                            {% endif %}
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
             </table>
         </div>
     </section>
