@@ -29,6 +29,14 @@ def most_rated():
                            max_pagination=max_pagination)
 
 
+@app.route('/show/<int:id>')
+def show_details(id):
+    shows = queries.get_all_shows()
+    return render_template('show-details.html', id=id, shows=shows)
+
+
+
+
 def main():
     app.run(debug=False)
 
