@@ -20,3 +20,7 @@
 
     padding: 0 5px;
 }
+
+h3.hidden {
+  display: none;
+}
