@@ -56,12 +56,12 @@
                 <div class="card detailed-view">
                 <p>And here is a "detailed" kind of view:</p>
                 <div class="row">
-                <div class="col col-twothird">
-                    {% if show.trailer %}
-                        <h3 class="hidden">{{ show.trailer }}</h3>
-                        <div id="player"></div>
-                    {% endif %}
-                </div>
+                    <div class="col col-twothird">
+                        {% if show.trailer %}
+                            <h3 class="hidden">{{ show.trailer }}</h3>
+                            <div id="player"></div>
+                        {% endif %}
+                    </div>
                     <div class="col col-twothird">
                         <h2>{{ show.title }}</h2>
                         <p class="small grayed">{{ show.runtime|convert_runtime }} <span
