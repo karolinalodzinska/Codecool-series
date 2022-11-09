@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>CsED</title>
+    {% for show in shows %}
+        {% if show.id == id %}
+            <title>{{ show.title }}</title>
+        {% endif %}
+    {% endfor %}
 
     <!-- Import Montserrat font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -29,6 +33,7 @@
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+
 </head>
 
 <body>
@@ -36,7 +41,7 @@
     <header class="clearfix">
         <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
         <span id="header-title" class="title">
-                    Codecool Series DB
+                    Codecool Series Database
                 </span>
         <div id="header-auth">
             <button type="button" id="bt-register">Register</button>
@@ -44,35 +49,30 @@
         </div>
     </header>
     <section>
-        <nav class="breadcrumb">
-            <a href="#">Game of Thrones</a>
-            <span class="separator">&gt;</span>
-            <a href="#">Season 3</a>
-            <span class="separator">&gt;</span>
-            <a href="#">Episode 8</a>
-        </nav>
-        <h1 class="title text-center">Welcome page</h1>
+        {% for show in shows %}
+            {% if show.id == id %}
+                <h1 class="title text-center">{{ show.title }}</h1>
 
-        <div class="card detailed-view">
-            <p>And here is a "detailed" kind of view:</p>
-            <div class="row">
-                <img src="http://www.impawards.com/2016/posters/deadpool_ver5.jpg" alt="Deadpool poster"
-                     class="poster col col-third">
-                <div class="col col-twothird">
-                    <h2>Deadpool</h2>
-                    <p class="small grayed">1h 48min <span class="separator">|</span> Action, Adventure, Comedy <span
-                            class="separator">|</span> 12 February 2016 (USA)</p>
-                    <p>A fast-talking mercenary with a morbid sense of humor is subjected to a rogue experiment that
-                        leaves
-                        him with accelerated healing powers and a quest for revenge.</p>
+                <div class="card detailed-view">
+                <p>And here is a "detailed" kind of view:</p>
+                <div class="row">
+                    <img src="http://www.impawards.com/2016/posters/deadpool_ver5.jpg" alt="Deadpool poster"
+                         class="poster col col-third">
+                    <div class="col col-twothird">
+                        <h2>{{ show.title }}</h2>
+                        <p class="small grayed">{{ show.runtime }} <span
+                                class="separator">|</span> {{ show.genres }} <span
+                                class="separator">|</span> {{ show.year }}</p>
+                        <p>{{ show.overview }}</p>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <p><b>Director:</b>&nbsp;<a href="#">Tim Miller</a></p>
-                <p><b>Writers:</b>&nbsp;<a href="#">Rhett Reese</a>, <a href="#">Paul Wernick</a></p>
-                <p><b>Stars:</b>&nbsp;<a href="#">Ryan Reynolds</a>, <a href="#">Morena Baccarin</a>, <a href="#">T.J.
-                    Miller</a></p>
-            </div>
+                <div>
+                <p><b>Rating:</b>&nbsp;{{ show.rating }}☆</p>
+                <p><b>Stars:</b>&nbsp;<a href="{{ show.actors }}">{{ show.actors }}</a></p>
+            {% endif %}
+        {% endfor %}
+
+        </div>
         </div>
     </section>
     <footer>
@@ -84,5 +84,4 @@
     <div class="light-blue-layer"></div>
 </div>
 </body>
-
 </html>
