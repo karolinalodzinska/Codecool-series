@@ -35,6 +35,17 @@ def show_details(id):
     return render_template('show-details.html', id=id, shows=shows)
 
 
+@app.template_filter('convert_runtime')
+def convert_runtime(runtime):
+    if runtime < 60:
+        return f'{runtime}min'
+    elif runtime % 60 == 0:
+        return f'{runtime//60}h'
+    else:
+        hours = f'{runtime//60}h'
+        minutes = f'{runtime % 60}min'
+        return hours + minutes
+
 
 
 def main():
