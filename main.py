@@ -18,6 +18,7 @@ def design():
     return render_template('design.html')
 
 
+@app.route('/shows/')
 @app.route('/shows/most-rated')
 def most_rated():
     page_number = request.args.get('page', default=1, type=int)

@@ -31,3 +31,11 @@ a#header-title:hover {
 
     margin: 15px;
 }
+
+.arrow-down:before{
+    content: "\25bc";
+}
+
+.arrow-up:before{
+    content: "\2BC5";
+}

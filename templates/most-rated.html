@@ -44,13 +44,13 @@
     <section>
         <h1 class="title text-center">Shows</h1>
         <div class="card">
-            <table>
+            <table id="table_to_sort">
                 <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Year</th>
-                    <th>Runtime</th>
-                    <th>Rating</th>
+                    <th id="title" onclick="sortTable('title')">Title</th>
+                    <th id="year" onclick="sortTable('year')">Year</th>
+                    <th id="runtime" onclick="sortTable('runtime')">Runtime</th>
+                    <th id="rating" onclick="sortTable('rating')">Rating</th>
                     <th>Genres</th>
                     <th>Trailer</th>
                     <th>Homepage</th>
@@ -126,5 +126,6 @@
     <div class="dark-blue-layer"></div>
     <div class="light-blue-layer"></div>
 </div>
+<script src="/static/js/sort.js"></script>
 </body>
 </html>
