@@ -37,10 +37,10 @@ def get_all_shows():
     shows.trailer,
     array_to_string((array_agg(DISTINCT actors.name))[1:3], ', ') AS actors
     FROM shows
-    JOIN show_characters ON shows.id = show_characters.show_id
-    JOIN show_genres ON shows.id = show_genres.show_id
-    JOIN genres ON genres.id = show_genres.genre_id
-    JOIN actors ON actors.id = show_characters.actor_id
+    LEFT JOIN show_characters ON shows.id = show_characters.show_id
+    LEFT JOIN show_genres ON shows.id = show_genres.show_id
+    LEFT JOIN genres ON genres.id = show_genres.genre_id
+    LEFT JOIN actors ON actors.id = show_characters.actor_id
     GROUP BY shows.id
     ''')
 
