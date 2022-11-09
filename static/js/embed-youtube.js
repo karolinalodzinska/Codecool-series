@@ -9,6 +9,12 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
+
+// my variables to get yt trailer ID
+var showTrailer = document.getElementsByTagName("h3")
+var showTrailerLink = showTrailer[0].innerText
+var videoId = showTrailerLink.split('v=')[1];
+
 var player;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
