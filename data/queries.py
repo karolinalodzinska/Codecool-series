@@ -25,7 +25,11 @@ def get_most_rated_shows(page_number):
     ''', variables={"page_number": page_number})
 
 
-def get_all_shows():
+def count_shows_element():
+    return data_manager.execute_select('SELECT count(id) FROM shows;')
+
+
+def get_show_details():
     return data_manager.execute_select('''
     SELECT shows.id,
     shows.title,
@@ -45,5 +49,13 @@ def get_all_shows():
     ''')
 
 
-def count_shows_element():
-    return data_manager.execute_select('SELECT count(id) FROM shows;')
+def get_seasons_for_show(id):
+    return data_manager.execute_select('''
+    SELECT seasons.id,
+    seasons.season_number,
+    seasons.title,
+    seasons.overview
+    FROM seasons
+    WHERE seasons.show_id = %(id)s
+    ORDER BY seasons.season_number;
+    ''', variables={"id": id})

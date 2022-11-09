@@ -53,7 +53,7 @@
             {% if show.id == id %}
                 <h1 class="title text-center">{{ show.title }}</h1>
 
-                <div class="card detailed-view">
+                <div class="card detailed-view" title="{{ show.title }}">
                 <p>And here is a "detailed" kind of view:</p>
                 <div class="row">
                     <div class="col col-twothird">
@@ -73,6 +73,27 @@
                 <div>
                 <p><b>Rating:</b>&nbsp;{{ show.rating }}☆</p>
                 <p><b>Stars:</b>&nbsp;<a href="{{ show.actors }}">{{ show.actors }}</a></p>
+
+                <div class="card" title="Seasons">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                            <th>Overview</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for season in seasons %}
+                            <tr>
+                                <td>{{ season.season_number }}</td>
+                                <td>{{ season.title }}</td>
+                                <td>{{ season.overview }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             {% endif %}
         {% endfor %}
 

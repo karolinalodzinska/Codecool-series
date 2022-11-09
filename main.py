@@ -31,8 +31,9 @@ def most_rated():
 
 @app.route('/show/<int:id>')
 def show_details(id):
-    shows = queries.get_all_shows()
-    return render_template('show-details.html', id=id, shows=shows)
+    shows = queries.get_show_details()
+    seasons = queries.get_seasons_for_show(id)
+    return render_template('show-details.html', id=id, shows=shows, seasons=seasons)
 
 
 @app.template_filter('convert_runtime')
