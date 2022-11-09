@@ -56,11 +56,15 @@
                 <div class="card detailed-view">
                 <p>And here is a "detailed" kind of view:</p>
                 <div class="row">
-                    <img src="http://www.impawards.com/2016/posters/deadpool_ver5.jpg" alt="Deadpool poster"
-                         class="poster col col-third">
+                <div class="col col-twothird">
+                    {% if show.trailer %}
+                        <h3 class="hidden">{{ show.trailer }}</h3>
+                        <div id="player"></div>
+                    {% endif %}
+                </div>
                     <div class="col col-twothird">
                         <h2>{{ show.title }}</h2>
-                        <p class="small grayed">{{ show.runtime }} <span
+                        <p class="small grayed">{{ show.runtime|convert_runtime }} <span
                                 class="separator">|</span> {{ show.genres }} <span
                                 class="separator">|</span> {{ show.year }}</p>
                         <p>{{ show.overview }}</p>
@@ -83,5 +87,6 @@
     <div class="dark-blue-layer"></div>
     <div class="light-blue-layer"></div>
 </div>
+<script src="/static/js/embed-youtube.js"></script>
 </body>
 </html>
