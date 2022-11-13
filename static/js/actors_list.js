@@ -3,10 +3,10 @@ function getShowsForActor(id) {
         let displayed = document.getElementsByClassName("displayed")
 
         if (displayed[0] && displayed[0].parentNode.id === id.toString()) {
-            removeElement(displayed)
+            removeElements(displayed)
         } else {
             if (displayed[0]) {
-                removeElement(displayed)
+                removeElements(displayed)
             }
             appendElements(id, data)
         }
@@ -25,7 +25,7 @@ function appendElements(id, data) {
     }
 }
 
-function removeElement(displayed) {
+function removeElements(displayed) {
     for (let i = displayed.length - 1; i >= 0; i--) {
         displayed[i].remove()
     }
