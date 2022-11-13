@@ -59,3 +59,26 @@ def get_seasons_for_show(id):
     WHERE seasons.show_id = %(id)s
     ORDER BY seasons.season_number;
     ''', variables={"id": id})
+
+
+def get_actors_list():
+    return data_manager.execute_select('''
+    SELECT actors.id,
+    SUBSTR(actors.name,1, POSITION(' ' IN actors.name)) AS name,
+    actors.birthday
+    FROM actors
+    ORDER BY actors.birthday ASC
+    LIMIT 100
+    ''')
+
+
+def get_actor_shows(id):
+    return data_manager.execute_select('''
+    SELECT shows.title,
+    actors.id
+    FROM shows
+    LEFT JOIN show_characters ON shows.id = show_characters.show_id
+    LEFT JOIN actors ON show_characters.actor_id = actors.id
+    WHERE actors.id = %(id)s
+    ''', variables={"id": id})
+

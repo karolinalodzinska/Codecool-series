@@ -49,6 +49,18 @@ def convert_runtime(runtime):
         return hours + minutes
 
 
+@app.route('/actors')
+def actors():
+    actor_list = queries.get_actors_list()
+    return render_template('list_actors.html', actor_list=actor_list)
+
+
+@app.route('/actors/<int:id>')
+def actor_shows(id):
+    actor_list = queries.get_actor_shows(id)
+    return {"actor_list": actor_list}
+
+
 def main():
     app.run(debug=False)
 
